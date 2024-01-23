@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.chessapp.piece.King;
 import org.chessapp.piece.Pawn;
 
 public class Main extends Application {
@@ -18,6 +19,13 @@ public class Main extends Application {
             Coordinate coordinate = new Coordinate(i, 6);
             board.setPiece(new Pawn(Color.WHITE, coordinate), coordinate);
         }
+
+        //Display kings
+        Coordinate kingCoordinate1 = new Coordinate(4, 0);
+        board.setPiece(new King(Color.BLACK, kingCoordinate1), kingCoordinate1);
+
+        Coordinate kingCoordinate2 = new Coordinate(4, 7);
+        board.setPiece(new King(Color.WHITE, kingCoordinate2), kingCoordinate2);
 
         Scene scene = new Scene(board, Configuration.W, Configuration.H);
         stage.setScene(scene);
