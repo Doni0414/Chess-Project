@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.chessapp.piece.Knight;
 import org.chessapp.piece.Pawn;
 import org.chessapp.piece.Rook;
 
@@ -31,6 +32,18 @@ public class Main extends Application {
         board.setPiece(new Rook(Color.WHITE, rookCoordinate3), rookCoordinate3);
         Coordinate rookCoordinate4 = new Coordinate(7, 7);
         board.setPiece(new Rook(Color.WHITE, rookCoordinate4), rookCoordinate4);
+
+        //Display black Knights
+        Coordinate knightCoordinate1 = new Coordinate(1, 0);
+        board.setPiece(new Knight(Color.BLACK, knightCoordinate1), knightCoordinate1);
+        Coordinate knightCoordinate2 = new Coordinate(6, 0);
+        board.setPiece(new Knight(Color.BLACK, knightCoordinate1), knightCoordinate2);
+
+        //Display white Knights
+        Coordinate knightCoordinate3 = new Coordinate(1, 7);
+        board.setPiece(new Knight(Color.BLACK, knightCoordinate3), knightCoordinate3);
+        Coordinate knightCoordinate4 = new Coordinate(6, 7);
+        board.setPiece(new Knight(Color.BLACK, knightCoordinate4), knightCoordinate4);
 
         Scene scene = new Scene(board, Configuration.W, Configuration.H);
         stage.setScene(scene);
