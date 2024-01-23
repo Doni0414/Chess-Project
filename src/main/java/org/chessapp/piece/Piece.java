@@ -10,10 +10,6 @@ import java.util.List;
 public abstract class Piece extends Label {
     private Coordinate coordinate;
 
-    public Piece() {
-
-    }
-
     public Piece(char c, Color color, Coordinate coordinate){
         setText(c + "");
         setTextFill(color);
@@ -29,6 +25,9 @@ public abstract class Piece extends Label {
     }
     public boolean isBlack(){
         return getTextFill().equals(Color.BLACK);
+    }
+    public boolean isWhite(){
+        return getTextFill().equals(Color.WHITE);
     }
 
     public abstract List<Coordinate> getMoves(Board board);
