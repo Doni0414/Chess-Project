@@ -8,6 +8,7 @@ import org.chessapp.piece.Knight;
 import org.chessapp.piece.Bishop;
 import org.chessapp.piece.Pawn;
 import org.chessapp.piece.Rook;
+import org.chessapp.piece.Queen;
 
 public class Main extends Application {
     @Override
@@ -57,6 +58,11 @@ public class Main extends Application {
         board.setPiece(new Bishop(Color.WHITE, bishopCoordinate3), bishopCoordinate3);
         Coordinate bishopCoordinate4 = new Coordinate(5, 7);
         board.setPiece(new Bishop(Color.WHITE, bishopCoordinate4), bishopCoordinate4);
+        //Display queens
+        Coordinate queenCoordinate1 = new Coordinate(3, 0);
+        board.setPiece(new Queen(Color.BLACK, queenCoordinate1), queenCoordinate1);
+        Coordinate queenCoordinate2 = new Coordinate(3, 7);
+        board.setPiece(new Queen(Color.BLACK, queenCoordinate2), queenCoordinate2);
 
         Scene scene = new Scene(board, Configuration.W, Configuration.H);
         stage.setScene(scene);
