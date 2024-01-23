@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Rook extends Piece{
 
-    public Rook(char c, Color color, Coordinate coordinate) {
-        super(c, color, coordinate);
+    public Rook(Color color, Coordinate coordinate) {
+        super(' ', color, coordinate);
         if (isBlack()){
             setText(PieceCode.BLACK_ROOK.getCode() + "");
         }else if(isWhite()){
