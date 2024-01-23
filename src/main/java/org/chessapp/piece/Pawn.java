@@ -10,9 +10,9 @@ public class Pawn extends Piece{
     public Pawn(Color color, Coordinate coordinate) {
         super(' ', color, coordinate);
         if (isBlack()){
-            setText(PieceCode.BLACK_PAWN + "");
+            setText(PieceCode.BLACK_PAWN.getCode() + "");
         }else if(isWhite()){
-            setText(PieceCode.WHITE_PAWN + "");
+            setText(PieceCode.WHITE_PAWN.getCode() + "");
         }
     }
 

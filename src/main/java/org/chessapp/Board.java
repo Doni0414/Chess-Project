@@ -2,6 +2,7 @@ package org.chessapp;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import org.chessapp.piece.Piece;
 
 public class Board extends GridPane {
     private Cell[][] cells;
@@ -27,5 +28,9 @@ public class Board extends GridPane {
 
     public void setCells(Cell[][] cells) {
         this.cells = cells;
+    }
+    public void setPiece(Piece piece, Coordinate coordinate){
+        int x = coordinate.getX(), y = coordinate.getY();
+        cells[y][x].setPiece(piece);
     }
 }
