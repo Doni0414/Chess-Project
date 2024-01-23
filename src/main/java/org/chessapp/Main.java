@@ -8,23 +8,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    public static final double W = 600, H = 600;
-
     @Override
     public void start(Stage stage) throws Exception {
-        GridPane grid = new GridPane();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                Rectangle rectangle = new Rectangle(0, 0, W / 8, H / 8);
-                if ((i + j) % 2 == 0){
-                    rectangle.setFill(Color.WHITE);
-                }
-                grid.add(rectangle, j, i);
-            }
-        }
-        Scene scene = new Scene(grid, W, H);
+        Board board = new Board(Configuration.W, Configuration.H);
+        Scene scene = new Scene(board, Configuration.W, Configuration.H);
         stage.setScene(scene);
-        stage.setTitle("Show grid");
+        stage.setTitle("Show board");
         stage.show();
     }
 }
