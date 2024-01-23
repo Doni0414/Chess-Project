@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.chessapp.piece.Knight;
 import org.chessapp.piece.Bishop;
+import org.chessapp.piece.King;
 import org.chessapp.piece.Pawn;
 import org.chessapp.piece.Rook;
 import org.chessapp.piece.Queen;
@@ -63,6 +64,12 @@ public class Main extends Application {
         board.setPiece(new Queen(Color.BLACK, queenCoordinate1), queenCoordinate1);
         Coordinate queenCoordinate2 = new Coordinate(3, 7);
         board.setPiece(new Queen(Color.BLACK, queenCoordinate2), queenCoordinate2);
+        //Display kings
+        Coordinate kingCoordinate1 = new Coordinate(4, 0);
+        board.setPiece(new King(Color.BLACK, kingCoordinate1), kingCoordinate1);
+
+        Coordinate kingCoordinate2 = new Coordinate(4, 7);
+        board.setPiece(new King(Color.WHITE, kingCoordinate2), kingCoordinate2);
 
         Scene scene = new Scene(board, Configuration.W, Configuration.H);
         stage.setScene(scene);
