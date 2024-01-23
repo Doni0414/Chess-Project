@@ -8,11 +8,13 @@ public class Board extends GridPane {
     public Board(double width, double height){
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                Rectangle rectangle = new Rectangle(0, 0, width / 8, height / 8);
+                Cell cell;
                 if ((i + j) % 2 == 0){
-                    rectangle.setFill(Color.WHITE);
+                    cell = new Cell(width / 8, height / 8, Color.WHITE);
+                }else{
+                    cell = new Cell(width / 8, height / 8, Color.BLACK);
                 }
-                add(rectangle, j, i);
+                add(cell, j, i);
             }
         }
     }
