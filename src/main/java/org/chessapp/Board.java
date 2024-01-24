@@ -48,7 +48,9 @@ public class Board extends GridPane {
     }
     public void setPiece(Piece piece, Coordinate coordinate){
         int x = coordinate.getX(), y = coordinate.getY();
-        piece.setCoordinate(coordinate);
+        if (piece != null){
+            piece.setCoordinate(coordinate);
+        }
         cells[y][x].setPiece(piece);
     }
     public void paintMoves(Piece piece){
@@ -75,5 +77,11 @@ public class Board extends GridPane {
                 }
             }
         }
+    }
+    public boolean isEmptyCell(Coordinate coordinate){
+        return getCell(coordinate).getPiece() == null;
+    }
+    public Cell getCell(Coordinate coordinate){
+        return cells[coordinate.getY()][coordinate.getX()];
     }
 }

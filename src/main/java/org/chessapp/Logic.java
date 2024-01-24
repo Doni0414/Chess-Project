@@ -1,5 +1,6 @@
 package org.chessapp;
 
+import org.chessapp.piece.Pawn;
 import org.chessapp.piece.Piece;
 
 import java.util.List;
@@ -14,6 +15,13 @@ public class Logic {
         if (moves.contains(dest) || eatMoves.contains(dest)){
             board.setPiece(null, piece.getCoordinate());
             board.setPiece(piece, dest);
+            if (piece instanceof Pawn){
+                if (!((Pawn) piece).isMoved()){
+                    ((Pawn) piece).setMoved(true);
+                }
+            }
+            board.repaint();
+            Logic.blackTurn = !Logic.blackTurn;
         }
     }
 }

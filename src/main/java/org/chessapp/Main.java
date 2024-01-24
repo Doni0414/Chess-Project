@@ -44,9 +44,9 @@ public class Main extends Application {
 
         //Display white Knights
         Coordinate knightCoordinate3 = new Coordinate(1, 7);
-        board.setPiece(new Knight(Color.BLACK, knightCoordinate3), knightCoordinate3);
+        board.setPiece(new Knight(Color.WHITE, knightCoordinate3), knightCoordinate3);
         Coordinate knightCoordinate4 = new Coordinate(6, 7);
-        board.setPiece(new Knight(Color.BLACK, knightCoordinate4), knightCoordinate4);
+        board.setPiece(new Knight(Color.WHITE, knightCoordinate4), knightCoordinate4);
 
         //Display black bishops
         Coordinate bishopCoordinate1 = new Coordinate(2, 0);
@@ -63,7 +63,7 @@ public class Main extends Application {
         Coordinate queenCoordinate1 = new Coordinate(3, 0);
         board.setPiece(new Queen(Color.BLACK, queenCoordinate1), queenCoordinate1);
         Coordinate queenCoordinate2 = new Coordinate(3, 7);
-        board.setPiece(new Queen(Color.BLACK, queenCoordinate2), queenCoordinate2);
+        board.setPiece(new Queen(Color.WHITE, queenCoordinate2), queenCoordinate2);
         //Display kings
         Coordinate kingCoordinate1 = new Coordinate(4, 0);
         board.setPiece(new King(Color.BLACK, kingCoordinate1), kingCoordinate1);

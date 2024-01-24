@@ -42,6 +42,8 @@ public class Cell extends StackPane {
             getChildren().remove(this.piece);
         }
         this.piece = piece;
-        getChildren().add(this.piece);
+        if (this.piece != null){
+            getChildren().add(this.piece);
+        }
     }
 }
