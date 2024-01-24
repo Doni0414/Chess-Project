@@ -20,4 +20,9 @@ public class Pawn extends Piece{
     public List<Coordinate> getMoves(Board board) {
         return null;
     }
+
+    @Override
+    public List<Coordinate> getEatMoves(Board board) {
+        return null;
+    }
 }
