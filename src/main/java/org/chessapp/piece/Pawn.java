@@ -70,15 +70,21 @@ public class Pawn extends Piece{
             coordinate2 = new Coordinate(x + 1, y + 1);
         }
         if (ValidMove.isValidMove(coordinate1)){
-            Piece piece1 = board.getCell(coordinate1).getPiece();
+            Cell cell1 = board.getCell(coordinate1);
+            Piece piece1 = cell1.getPiece();
             if (piece1 != null && isBlack() != piece1.isBlack()) {
+                coordinates.add(coordinate1);
+            }else if(piece1 == null && cell1.getTakeOnPass() != null){
                 coordinates.add(coordinate1);
             }
         }
         if (ValidMove.isValidMove(coordinate2)) {
-            Piece piece2 = board.getCell(coordinate2).getPiece();
+            Cell cell2 = board.getCell(coordinate2);
+            Piece piece2 = cell2.getPiece();
             if (piece2 != null && isBlack() != piece2.isBlack()) {
-                coordinates.add(coordinate1);
+                coordinates.add(coordinate2);
+            }else if(piece2 == null && cell2.getTakeOnPass() != null){
+                coordinates.add(coordinate2);
             }
         }
         return coordinates;

@@ -4,11 +4,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.chessapp.piece.Piece;
+import org.chessapp.piece.TakeOnPass;
 
 public class Cell extends StackPane {
     private Rectangle rectangle;
     private Coordinate coordinate;
     private Piece piece;
+    private TakeOnPass takeOnPass;
 
     public Cell(double width, double height, Color color, Coordinate coordinate){
         this.rectangle = new Rectangle(width, height);
@@ -45,5 +47,13 @@ public class Cell extends StackPane {
         if (this.piece != null){
             getChildren().add(this.piece);
         }
+    }
+
+    public TakeOnPass getTakeOnPass() {
+        return takeOnPass;
+    }
+
+    public void setTakeOnPass(TakeOnPass takeOnPass) {
+        this.takeOnPass = takeOnPass;
     }
 }
