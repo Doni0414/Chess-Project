@@ -31,6 +31,7 @@ public class Board extends GridPane {
     }
     public void setPiece(Piece piece, Coordinate coordinate){
         int x = coordinate.getX(), y = coordinate.getY();
+        piece.setCoordinate(coordinate);
         cells[y][x].setPiece(piece);
     }
 }
