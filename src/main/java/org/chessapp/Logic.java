@@ -19,11 +19,10 @@ public class Logic {
             if (takeOnPass != null){
                 board.setPiece(null, takeOnPass.getPawn().getCoordinate());
             }
-                clearTakeOnPass(board);
+            clearTakeOnPass(board);
             if (piece instanceof Pawn){
                 if (!((Pawn) piece).isMoved()){
                     ((Pawn) piece).setMoved(true);
-                    System.out.println(Math.abs(dest.getY() - piece.getCoordinate().getY()));
                     if (Math.abs(dest.getY() - piece.getCoordinate().getY()) == 2){
                         Coordinate newCoordinate = new Coordinate(dest.getX(), piece.isBlack() ? dest.getY() - 1 : dest.getY() + 1);
                         Cell cell = board.getCell(newCoordinate);
