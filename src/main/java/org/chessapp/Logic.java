@@ -82,6 +82,20 @@ public class Logic {
         isFinished = true;
         return true;
     }
+    public static boolean isDraw(Board board){
+        List<Piece> team = board.getTeam(blackTurn);
+        for (Piece piece: team){
+            List<Coordinate> moves = piece.getMoves(board);
+            moves.addAll(piece.getEatMoves(board));
+            if (moves.size() > 0){
+                return false;
+            }
+        }
+        String text = "Draw!";
+        GameStatusPane.setText(text);
+        isFinished = true;
+        return true;
+    }
     private static void clearTakeOnPass(Board board) {
         Cell[][] cells = board.getCells();
         for (int i = 0; i < 8; i++) {
