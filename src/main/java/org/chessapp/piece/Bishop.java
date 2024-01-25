@@ -71,4 +71,29 @@ public class Bishop extends Piece{
         }
         return coordinates;
     }
+
+    @Override
+    public List<Coordinate> getAttacks(Board board) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        int x = coordinate.getX(), y = coordinate.getY();
+        int[] dx = {-1, 1};
+        int[] dy = {-1, 1};
+        for (int dxi : dx) {
+            for (int dyi : dy) {
+                for (int k = 1; k < 8; k++) {
+                    Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
+                    if (ValidMove.isValidMove(newCoordinate)) {
+                        Piece piece = board.getCell(newCoordinate).getPiece();
+                        coordinates.add(newCoordinate);
+                        if (piece != null) {
+                            break;
+                        }
+                    }else{
+                        break;
+                    }
+                }
+            }
+        }
+        return coordinates;
+    }
 }

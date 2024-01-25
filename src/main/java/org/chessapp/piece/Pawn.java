@@ -89,6 +89,26 @@ public class Pawn extends Piece{
         }
         return coordinates;
     }
+    @Override
+    public List<Coordinate> getAttacks(Board board){
+        List<Coordinate> coordinates = new ArrayList<>();
+        int x = coordinate.getX(), y = coordinate.getY();
+        Coordinate coordinate1, coordinate2;
+        if (isWhite()){
+            coordinate1 = new Coordinate(x - 1, y - 1);
+            coordinate2 = new Coordinate(x + 1, y - 1);
+        }else{
+            coordinate1 = new Coordinate(x - 1, y + 1);
+            coordinate2 = new Coordinate(x + 1, y + 1);
+        }
+        if (ValidMove.isValidMove(coordinate1)){
+            coordinates.add(coordinate1);
+        }
+        if (ValidMove.isValidMove(coordinate2)) {
+            coordinates.add(coordinate2);
+        }
+        return coordinates;
+    }
 
     public boolean isMoved() {
         return moved;

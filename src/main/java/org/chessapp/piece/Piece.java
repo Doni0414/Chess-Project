@@ -36,6 +36,7 @@ public abstract class Piece extends Label {
 
     public abstract List<Coordinate> getMoves(Board board);
     public abstract List<Coordinate> getEatMoves(Board board);
+    public abstract List<Coordinate> getAttacks(Board board);
 
     public Color getColor() {
         return color;

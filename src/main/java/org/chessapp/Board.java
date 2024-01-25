@@ -2,8 +2,10 @@ package org.chessapp;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import org.chessapp.piece.Pawn;
 import org.chessapp.piece.Piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Board extends GridPane {
@@ -83,5 +85,20 @@ public class Board extends GridPane {
     }
     public Cell getCell(Coordinate coordinate){
         return cells[coordinate.getY()][coordinate.getX()];
+    }
+    public List<Coordinate> getAttackedCoordinates(){
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (Cell[] cs: cells){
+            for (Cell cell: cs){
+                Piece piece = cell.getPiece();
+                if (piece != null && Logic.blackTurn != piece.isBlack()){
+                    List<Coordinate> attacks = piece.getAttacks(this);
+                    if (attacks != null) {
+                        coordinates.addAll(attacks);
+                    }
+                }
+            }
+        }
+        return coordinates;
     }
 }

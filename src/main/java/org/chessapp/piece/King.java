@@ -24,13 +24,14 @@ public class King extends Piece{
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx = {-1, 0, 1};
         int[] dy = {-1, 0, 1};
+        List<Coordinate> attackedCoordinates = board.getAttackedCoordinates();
         for (int dxi: dx){
             for (int dyi: dy){
                 if (dxi == 0 && dyi == 0){
                     continue;
                 }
                 Coordinate newCoordinate = new Coordinate(x + dxi, y + dyi);
-                if (ValidMove.isValidMove(newCoordinate)){
+                if (ValidMove.isValidMove(newCoordinate) && !attackedCoordinates.contains(newCoordinate)){
                     Piece piece = board.getCell(newCoordinate).getPiece();
                     if (piece == null){
                         coordinates.add(newCoordinate);
@@ -47,6 +48,31 @@ public class King extends Piece{
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx = {-1, 0, 1};
         int[] dy = {-1, 0, 1};
+        List<Coordinate> attackedCoordinates = board.getAttackedCoordinates();
+
+        for (int dxi: dx){
+            for (int dyi: dy){
+                if (dxi == 0 && dyi == 0){
+                    continue;
+                }
+                Coordinate newCoordinate = new Coordinate(x + dxi, y + dyi);
+                if (ValidMove.isValidMove(newCoordinate) && !attackedCoordinates.contains(newCoordinate)){
+                    Piece piece = board.getCell(newCoordinate).getPiece();
+                    if (piece != null && piece.isBlack() != isBlack()){
+                        coordinates.add(newCoordinate);
+                    }
+                }
+            }
+        }
+        return coordinates;
+    }
+
+    @Override
+    public List<Coordinate> getAttacks(Board board) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        int x = coordinate.getX(), y = coordinate.getY();
+        int[] dx = {-1, 0, 1};
+        int[] dy = {-1, 0, 1};
         for (int dxi: dx){
             for (int dyi: dy){
                 if (dxi == 0 && dyi == 0){
@@ -54,10 +80,7 @@ public class King extends Piece{
                 }
                 Coordinate newCoordinate = new Coordinate(x + dxi, y + dyi);
                 if (ValidMove.isValidMove(newCoordinate)){
-                    Piece piece = board.getCell(newCoordinate).getPiece();
-                    if (piece != null && piece.isBlack() != isBlack()){
-                        coordinates.add(newCoordinate);
-                    }
+                    coordinates.add(newCoordinate);
                 }
             }
         }

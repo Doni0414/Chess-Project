@@ -26,6 +26,7 @@ public class Knight extends Piece{
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx = {-2, -2, 2, 2, -1, 1, -1, 1};
         int[] dy = {-1, 1, -1, 1, -2, -2, 2, 2};
+
         for (int i = 0; i < dx.length; i++) {
             Coordinate newCoordinate = new Coordinate(x + dx[i], y + dy[i]);
             if (ValidMove.isValidMove(newCoordinate)){
@@ -50,6 +51,22 @@ public class Knight extends Piece{
                 if (piece != null && piece.isBlack() != isBlack()){
                     coordinates.add(newCoordinate);
                 }
+            }
+        }
+        return coordinates;
+    }
+
+    @Override
+    public List<Coordinate> getAttacks(Board board) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        int x = coordinate.getX(), y = coordinate.getY();
+        int[] dx = {-2, -2, 2, 2, -1, 1, -1, 1};
+        int[] dy = {-1, 1, -1, 1, -2, -2, 2, 2};
+
+        for (int i = 0; i < dx.length; i++) {
+            Coordinate newCoordinate = new Coordinate(x + dx[i], y + dy[i]);
+            if (ValidMove.isValidMove(newCoordinate)){
+                coordinates.add(newCoordinate);
             }
         }
         return coordinates;
