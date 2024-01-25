@@ -2,6 +2,8 @@ package org.chessapp;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.chessapp.piece.Knight;
@@ -14,7 +16,7 @@ import org.chessapp.piece.Queen;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Board board = new Board(Configuration.W, Configuration.H);
+        Board board = new Board(Configuration.BOARD_WIDTH, Configuration.BOARD_HEIGHT);
         for (int i = 0; i < 8; i++) {
             Coordinate coordinate = new Coordinate(i, 1);
             board.setPiece(new Pawn(Color.BLACK, coordinate), coordinate);
@@ -71,7 +73,8 @@ public class Main extends Application {
         Coordinate kingCoordinate2 = new Coordinate(4, 7);
         board.setPiece(new King(Color.WHITE, kingCoordinate2), kingCoordinate2);
 
-        Scene scene = new Scene(board, Configuration.W, Configuration.H);
+        Game game = new Game(board, new GameStatusPane());
+        Scene scene = new Scene(game, Configuration.W, Configuration.BOARD_HEIGHT);
         stage.setScene(scene);
         stage.setTitle("Show board");
         stage.show();
