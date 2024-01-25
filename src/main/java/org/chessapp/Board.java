@@ -2,7 +2,6 @@ package org.chessapp;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import org.chessapp.piece.Pawn;
 import org.chessapp.piece.Piece;
 
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class Board extends GridPane {
                     }else if(Logic.target != null){
                         Logic.logic(this, Logic.target, cell.getCoordinate());
                     }
+                    Logic.isCheck(this);
                 });
                 add(cell, j, i);
             }
@@ -100,5 +100,10 @@ public class Board extends GridPane {
             }
         }
         return coordinates;
+    }
+    public void paintCell(Coordinate coordinate, Color color){
+        if (ValidMove.isValidMove(coordinate)){
+            getCell(coordinate).getRectangle().setFill(color);
+        }
     }
 }
