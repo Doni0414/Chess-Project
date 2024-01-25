@@ -4,7 +4,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class GameStatusPane extends VBox {
-    private Text status;
+    public static Text status;
 
     public GameStatusPane(){
         status = new Text("Ongoing");
@@ -14,11 +14,7 @@ public class GameStatusPane extends VBox {
         return status;
     }
 
-    public void setStatus(Text status) {
-        this.status = status;
-    }
-
-    public void setText(String text){
+    public static void setText(String text){
         status.setText(text);
     }
 }

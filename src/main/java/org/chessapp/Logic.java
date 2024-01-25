@@ -11,8 +11,9 @@ import java.util.List;
 public class Logic {
     public static boolean blackTurn;
     public static Piece target;
+    public static boolean isFinished;
 
-    public static void logic(Board board, Piece piece, Coordinate dest){
+    public static boolean logic(Board board, Piece piece, Coordinate dest, boolean recover){
         List<Coordinate> moves = piece.getMoves(board);
         List<Coordinate> eatMoves = piece.getEatMoves(board);
         if (moves.contains(dest) || eatMoves.contains(dest)){
@@ -26,7 +27,7 @@ public class Logic {
             board.setPiece(piece, dest);
 
             boolean isCheck = isCheck(board);
-            if (isCheck){
+            if (isCheck || recover){
                 board.setPiece(piece, src);
                 board.setPiece(destPiece, dest);
                 if (takeOnPass != null){
@@ -46,9 +47,10 @@ public class Logic {
                     }
                 }
             }
-
             board.repaint();
+            return isCheck;
         }
+        return false;
     }
     public static boolean isCheck(Board board){
         List<Coordinate> attackedCoordinates = board.getAttackedCoordinates();
@@ -56,10 +58,29 @@ public class Logic {
             Piece piece = board.getCell(coordinate).getPiece();
             if (piece instanceof King && piece.isBlack() == blackTurn){
                 board.paintCell(coordinate, Color.ORANGE);
+                String text = blackTurn ? "Check for Black King" : "Check for White King";
+                GameStatusPane.setText(text);
                 return true;
             }
         }
+        GameStatusPane.setText("Ongoing");
         return false;
+    }
+    public static boolean isMate(Board board){
+        List<Piece> team = board.getTeam(blackTurn);
+        for (Piece piece: team){
+            List<Coordinate> moves = piece.getMoves(board);
+            moves.addAll(piece.getEatMoves(board));
+            for (Coordinate move: moves){
+                if (!logic(board, piece, move, true)){
+                    return false;
+                }
+            }
+        }
+        String text = blackTurn ? "Mate for Black King\nWhite wins!" : "Mate for White King\nBlack Wins";
+        GameStatusPane.setText(text);
+        isFinished = true;
+        return true;
     }
     private static void clearTakeOnPass(Board board) {
         Cell[][] cells = board.getCells();

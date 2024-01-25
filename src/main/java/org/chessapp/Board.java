@@ -21,20 +21,26 @@ public class Board extends GridPane {
                 }
                 cells[i][j] = cell;
                 cells[i][j].setOnMouseClicked(e -> {
-                    Piece piece = cell.getPiece();
-                    if (piece != null){
-                        if (piece.isBlack() == Logic.blackTurn){
-                            repaint();
-                            Logic.target = piece;
-                            paintMoves(piece);
-                            paintEatMoves(piece);
+                    if (!Logic.isFinished){
+                        Piece piece = cell.getPiece();
+                        if (piece != null){
+                            if (piece.isBlack() == Logic.blackTurn){
+                                repaint();
+                                Logic.target = piece;
+                                paintMoves(piece);
+                                paintEatMoves(piece);
+                            }else if(Logic.target != null){
+                                Logic.logic(this, Logic.target, cell.getCoordinate(), false);
+                                Logic.isCheck(this);
+                                Logic.isMate(this);
+                            }
                         }else if(Logic.target != null){
-                            Logic.logic(this, Logic.target, cell.getCoordinate());
+                            Logic.logic(this, Logic.target, cell.getCoordinate(), false);
+                            Logic.isCheck(this);
+                            Logic.isMate(this);
                         }
-                    }else if(Logic.target != null){
-                        Logic.logic(this, Logic.target, cell.getCoordinate());
+
                     }
-                    Logic.isCheck(this);
                 });
                 add(cell, j, i);
             }
@@ -105,5 +111,17 @@ public class Board extends GridPane {
         if (ValidMove.isValidMove(coordinate)){
             getCell(coordinate).getRectangle().setFill(color);
         }
+    }
+    public List<Piece> getTeam(boolean isBlack){
+        List<Piece> pieces = new ArrayList<>();
+        for (Cell[] cs: cells){
+            for (Cell cell: cs){
+                Piece piece = cell.getPiece();
+                if (piece != null && isBlack == piece.isBlack()){
+                    pieces.add(piece);
+                }
+            }
+        }
+        return pieces;
     }
 }
