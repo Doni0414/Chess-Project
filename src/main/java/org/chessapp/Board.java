@@ -31,16 +31,22 @@ public class Board extends GridPane {
                                 paintEatMoves(piece);
                             }else if(Logic.target != null){
                                 Logic.logic(this, Logic.target, cell.getCoordinate(), false);
-                                Logic.isMate(this);
+                                Logic.isDraw(this);
                                 if (!Logic.isFinished){
-                                    Logic.isCheck(this);
+                                    Logic.isMate(this);
+                                    if (!Logic.isFinished){
+                                        Logic.isCheck(this);
+                                    }
                                 }
                             }
                         }else if(Logic.target != null){
                             Logic.logic(this, Logic.target, cell.getCoordinate(), false);
-                            Logic.isMate(this);
+                            Logic.isDraw(this);
                             if (!Logic.isFinished){
-                                Logic.isCheck(this);
+                                Logic.isMate(this);
+                                if (!Logic.isFinished){
+                                    Logic.isCheck(this);
+                                }
                             }
                         }
 
