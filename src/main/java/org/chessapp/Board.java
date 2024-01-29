@@ -10,14 +10,14 @@ import java.util.List;
 public class Board extends GridPane {
     private Cell[][] cells;
     public Board(double width, double height){
-        this.cells = new Cell[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        this.cells = new Cell[Configuration.BOARD_ROWS][Configuration.BOARD_COLS];
+        for (int i = 0; i < Configuration.BOARD_ROWS; i++) {
+            for (int j = 0; j < Configuration.BOARD_COLS; j++) {
                 Cell cell;
                 if ((i + j) % 2 == 0){
-                    cell = new Cell(width / 8, height / 8, Color.WHITE, new Coordinate(j, i));
+                    cell = new Cell(width / Configuration.BOARD_COLS, height / Configuration.BOARD_ROWS, Color.WHITE, new Coordinate(j, i));
                 }else{
-                    cell = new Cell(width / 8, height / 8, Color.BLACK, new Coordinate(j, i));
+                    cell = new Cell(width / Configuration.BOARD_COLS, height / Configuration.BOARD_ROWS, Color.BLACK, new Coordinate(j, i));
                 }
                 cells[i][j] = cell;
                 cells[i][j].setOnMouseClicked(e -> {

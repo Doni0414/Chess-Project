@@ -1,10 +1,7 @@
 package org.chessapp.piece;
 
 import javafx.scene.paint.Color;
-import org.chessapp.Board;
-import org.chessapp.Cell;
-import org.chessapp.Coordinate;
-import org.chessapp.ValidMove;
+import org.chessapp.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +130,7 @@ public class Rook extends Piece{
         int[] dx1 = {-1, 1, 0, 0};
         int[] dy1 = {0, 0, -1, 1};
         for (int i = 0; i < dx1.length; i++) {
-            for (int j = 1; j < 8; j++) {
+            for (int j = 1; j < Configuration.BOARD_COLS; j++) {
                 Coordinate newCoordinate = new Coordinate(x + j * dx1[i], y + j * dy1[i]);
                 if (ValidMove.isValidMove(newCoordinate)){
                     Piece piece = board.getCell(newCoordinate).getPiece();

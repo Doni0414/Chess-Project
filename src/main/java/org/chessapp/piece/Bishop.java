@@ -1,10 +1,7 @@
 package org.chessapp.piece;
 
 import javafx.scene.paint.Color;
-import org.chessapp.Board;
-import org.chessapp.Cell;
-import org.chessapp.Coordinate;
-import org.chessapp.ValidMove;
+import org.chessapp.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,7 @@ public class Bishop extends Piece{
         int[] dy = {-1, 1};
         for (int dxi : dx) {
             for (int dyi : dy) {
-                for (int k = 1; k < 8; k++) {
+                for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
                     if (ValidMove.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
@@ -53,7 +50,7 @@ public class Bishop extends Piece{
         int[] dy = {-1, 1};
         for (int dxi : dx) {
             for (int dyi : dy) {
-                for (int k = 1; k < 8; k++) {
+                for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
                     if (ValidMove.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
@@ -80,7 +77,7 @@ public class Bishop extends Piece{
         int[] dy = {-1, 1};
         for (int dxi : dx) {
             for (int dyi : dy) {
-                for (int k = 1; k < 8; k++) {
+                for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
                     if (ValidMove.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
