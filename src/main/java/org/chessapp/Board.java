@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Board extends GridPane {
     private Cell[][] cells;
+    private Logic logic;
+
     public Board(double width, double height){
         this.cells = new Cell[Configuration.BOARD_ROWS][Configuration.BOARD_COLS];
         for (int i = 0; i < Configuration.BOARD_ROWS; i++) {
@@ -20,38 +22,6 @@ public class Board extends GridPane {
                     cell = new Cell(width / Configuration.BOARD_COLS, height / Configuration.BOARD_ROWS, Color.BLACK, new Coordinate(j, i));
                 }
                 cells[i][j] = cell;
-                cells[i][j].setOnMouseClicked(e -> {
-                    if (!Logic.isFinished){
-                        Piece piece = cell.getPiece();
-                        if (piece != null){
-                            if (piece.isBlack() == Logic.blackTurn){
-                                repaint();
-                                Logic.target = piece;
-                                paintMoves(piece);
-                                paintEatMoves(piece);
-                            }else if(Logic.target != null){
-                                Logic.logic(this, Logic.target, cell.getCoordinate(), false);
-                                Logic.isDraw(this);
-                                if (!Logic.isFinished){
-                                    Logic.isMate(this);
-                                    if (!Logic.isFinished){
-                                        Logic.isCheck(this);
-                                    }
-                                }
-                            }
-                        }else if(Logic.target != null){
-                            Logic.logic(this, Logic.target, cell.getCoordinate(), false);
-                            Logic.isDraw(this);
-                            if (!Logic.isFinished){
-                                Logic.isMate(this);
-                                if (!Logic.isFinished){
-                                    Logic.isCheck(this);
-                                }
-                            }
-                        }
-
-                    }
-                });
                 add(cell, j, i);
             }
         }
@@ -133,5 +103,16 @@ public class Board extends GridPane {
             }
         }
         return pieces;
+    }
+    public void setLogic(Logic logic){
+        this.logic = logic;
+        for (int i = 0; i < Configuration.BOARD_ROWS; i++) {
+            for (int j = 0; j < Configuration.BOARD_COLS; j++) {
+                Cell cell = cells[i][j];
+                cell.setOnMouseClicked(e -> {
+                    logic.logic(cell);
+                });
+            }
+        }
     }
 }

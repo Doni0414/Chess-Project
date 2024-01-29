@@ -9,48 +9,36 @@ import org.chessapp.piece.TakeOnPass;
 import java.util.List;
 
 public class Logic {
-    public static boolean blackTurn;
-    public static Piece target;
-    public static boolean isFinished;
+    private boolean blackTurn;
+    private boolean isFinished;
+    private Piece target;
+    private final Board board;
 
-    public static boolean logic(Board board, Piece piece, Coordinate dest, boolean recover){
-        List<Coordinate> moves = piece.getMoves(board);
-        List<Coordinate> eatMoves = piece.getEatMoves(board);
-        if (moves.contains(dest) || eatMoves.contains(dest)){
-            Coordinate src = piece.getCoordinate();
-            Piece destPiece = board.getCell(dest).getPiece();
-            board.setPiece(null, piece.getCoordinate());
-            TakeOnPass takeOnPass = (piece instanceof Pawn) ? board.getCell(dest).getTakeOnPass() : null;
-            if (takeOnPass != null){
-                board.setPiece(null, takeOnPass.getPawn().getCoordinate());
-            }
-            board.setPiece(piece, dest);
+    public Logic(Board board){
+        this.board = board;
+        board.setLogic(this);
+    }
 
-            boolean isCheck = isCheck(board);
-            if (isCheck || recover){
-                board.setPiece(piece, src);
-                board.setPiece(destPiece, dest);
-                if (takeOnPass != null){
-                    board.setPiece(takeOnPass.getPawn(), takeOnPass.getPawn().getCoordinate());
+    public void logic(Cell cell){
+        if (!isFinished){
+            Piece piece = cell.getPiece();
+            if (piece != null){
+                if (piece.isBlack() == blackTurn){
+                    board.repaint();
+                    target = piece;
+                    board.paintMoves(piece);
+                    board.paintEatMoves(piece);
+                }else if(target != null){
+
                 }
-            }else{
-                Logic.blackTurn = !Logic.blackTurn;
-                clearTakeOnPass(board);
-                if (piece instanceof Pawn){
-                    if (!((Pawn) piece).isMoved()){
-                        ((Pawn) piece).setMoved(true);
-                        if (Math.abs(dest.getY() - src.getY()) == 2){
-                            Coordinate newCoordinate = new Coordinate(dest.getX(), piece.isBlack() ? dest.getY() - 1 : dest.getY() + 1);
-                            Cell cell = board.getCell(newCoordinate);
-                            cell.setTakeOnPass(new TakeOnPass((Pawn) piece, newCoordinate));
-                        }
-                    }
-                }
+            }else if(target != null){
+
             }
-            board.repaint();
-            return isCheck;
         }
-        return false;
+    }
+    public void move(Piece piece, Cell cell){
+        board.setPiece(null, piece.getCoordinate());
+        board.setPiece(piece, cell.getCoordinate());
     }
     public static boolean isCheck(Board board){
         List<Coordinate> attackedCoordinates = board.getAttackedCoordinates();
@@ -103,5 +91,9 @@ public class Logic {
                 cells[i][j].setTakeOnPass(null);
             }
         }
+    }
+
+    public Board getBoard() {
+        return board;
     }
 }
