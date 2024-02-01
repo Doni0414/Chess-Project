@@ -4,8 +4,8 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import org.chessapp.Board;
-import org.chessapp.Coordinate;
+import org.chessapp.game.components.board.Board;
+import org.chessapp.utils.Coordinate;
 
 import java.util.List;
 

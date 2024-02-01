@@ -1,6 +1,6 @@
 package org.chessapp.piece;
 
-import org.chessapp.Coordinate;
+import org.chessapp.utils.Coordinate;
 
 public class TakeOnPass {
     private Pawn pawn;

@@ -1,4 +1,4 @@
-package org.chessapp;
+package org.chessapp.utils;
 
 public class Coordinate {
     private int x;

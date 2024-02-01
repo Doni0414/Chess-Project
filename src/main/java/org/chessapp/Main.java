@@ -4,12 +4,16 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.chessapp.game.Game;
+import org.chessapp.game.components.board.Board;
+import org.chessapp.game.components.sidePane.GameStatusPane;
 import org.chessapp.piece.Knight;
 import org.chessapp.piece.Bishop;
 import org.chessapp.piece.King;
 import org.chessapp.piece.Pawn;
 import org.chessapp.piece.Rook;
 import org.chessapp.piece.Queen;
+import org.chessapp.utils.Coordinate;
 
 public class Main extends Application {
     @Override

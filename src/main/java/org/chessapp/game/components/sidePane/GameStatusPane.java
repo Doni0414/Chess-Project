@@ -1,4 +1,4 @@
-package org.chessapp;
+package org.chessapp.game.components.sidePane;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;

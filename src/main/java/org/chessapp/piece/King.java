@@ -1,9 +1,9 @@
 package org.chessapp.piece;
 
 import javafx.scene.paint.Color;
-import org.chessapp.Board;
-import org.chessapp.Coordinate;
-import org.chessapp.ValidMove;
+import org.chessapp.game.components.board.Board;
+import org.chessapp.utils.Coordinate;
+import org.chessapp.utils.ValidMove;
 
 import java.util.ArrayList;
 import java.util.List;

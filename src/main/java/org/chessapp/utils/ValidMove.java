@@ -1,4 +1,6 @@
-package org.chessapp;
+package org.chessapp.utils;
+
+import org.chessapp.Configuration;
 
 public class ValidMove {
     public static boolean isValidMove(Coordinate coordinate){
