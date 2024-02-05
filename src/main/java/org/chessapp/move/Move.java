@@ -3,7 +3,7 @@ package org.chessapp.move;
 import org.chessapp.piece.Piece;
 import org.chessapp.utils.Coordinate;
 
-public class Move {
+public class Move implements Cloneable {
     private Piece piece;
     private Coordinate src;
     private Coordinate dest;
@@ -36,5 +36,17 @@ public class Move {
 
     public void setDest(Coordinate dest) {
         this.dest = dest;
+    }
+    @Override
+    public Move clone() {
+        try {
+            Move clone = (Move) super.clone();
+            Piece clonePiece = piece.clone();
+            clone.setPiece(clonePiece);
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

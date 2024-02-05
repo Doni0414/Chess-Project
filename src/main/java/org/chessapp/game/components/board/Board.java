@@ -49,21 +49,18 @@ public class Board extends GridPane {
     public Cell getCell(Coordinate coordinate){
         return cells[coordinate.getY()][coordinate.getX()];
     }
-//    public List<Coordinate> getAttackedCoordinates(){
-//        List<Coordinate> coordinates = new ArrayList<>();
-//        for (Cell[] cs: cells){
-//            for (Cell cell: cs){
-//                Piece piece = cell.getPiece();
-//                if (piece != null && Logic.blackTurn != piece.isBlack()){
-//                    List<Coordinate> attacks = piece.getAttacks(this);
-//                    if (attacks != null) {
-//                        coordinates.addAll(attacks);
-//                    }
-//                }
-//            }
-//        }
-//        return coordinates;
-//    }
+    public List<Coordinate> getAttackedCoordinates(boolean isBlack){
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (Piece piece: getTeam(isBlack)){
+            if (piece != null && isBlack == piece.isBlack()){
+                List<Coordinate> attacks = piece.getAttackedCoordinates(this);
+                if (attacks != null) {
+                    coordinates.addAll(attacks);
+                }
+            }
+        }
+        return coordinates;
+    }
 
     public List<Piece> getTeam(boolean isBlack){
         List<Piece> pieces = new ArrayList<>();

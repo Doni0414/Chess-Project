@@ -4,7 +4,13 @@ import org.chessapp.piece.Piece;
 import org.chessapp.utils.Coordinate;
 
 public class TakeOnPassMove extends EatMove{
-    public TakeOnPassMove(Piece piece, Piece eaten, Coordinate src, Coordinate dest) {
+    private final Coordinate eatenSrc;
+    public TakeOnPassMove(Piece piece, Piece eaten, Coordinate src, Coordinate dest, Coordinate eatenSrc) {
         super(piece, eaten, src, dest);
+        this.eatenSrc = eatenSrc;
+    }
+
+    public Coordinate getEatenSrc() {
+        return eatenSrc;
     }
 }

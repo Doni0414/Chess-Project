@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import org.chessapp.game.Game;
 import org.chessapp.game.components.board.Board;
 import org.chessapp.game.components.sidePane.GameStatusPane;
+import org.chessapp.game.components.sidePane.SidePane;
 import org.chessapp.piece.Knight;
 import org.chessapp.piece.Bishop;
 import org.chessapp.piece.King;
@@ -75,7 +76,7 @@ public class Main extends Application {
         Coordinate kingCoordinate2 = new Coordinate(4, 7);
         board.setPiece(new King(Color.WHITE, kingCoordinate2), kingCoordinate2);
 
-        Game game = new Game(board, new GameStatusPane());
+        Game game = new Game(board, new SidePane());
         Scene scene = new Scene(game, Configuration.W, Configuration.BOARD_HEIGHT);
         stage.setScene(scene);
         stage.setTitle("Show board");

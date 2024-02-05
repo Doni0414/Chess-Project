@@ -2,6 +2,7 @@ package org.chessapp.game;
 
 import javafx.scene.layout.HBox;
 import org.chessapp.game.components.board.Board;
+import org.chessapp.game.components.sidePane.GameStatusPane;
 import org.chessapp.game.components.sidePane.SidePane;
 import org.chessapp.game.logic.Logic;
 
@@ -54,5 +55,10 @@ public class Game extends HBox {
 
     public SidePane getSidePane() {
         return sidePane;
+    }
+
+    public void setStatus(String text){
+        GameStatusPane statusPane = getSidePane().getGameStatusPane();
+        statusPane.setText(text);
     }
 }

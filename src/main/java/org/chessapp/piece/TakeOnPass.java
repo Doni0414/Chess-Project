@@ -5,6 +5,7 @@ import org.chessapp.utils.Coordinate;
 public class TakeOnPass {
     private Pawn pawn;
     private Coordinate coordinate;
+    private int status = 1;
 
     public TakeOnPass(Pawn pawn, Coordinate coordinate) {
         this.pawn = pawn;
@@ -25,5 +26,11 @@ public class TakeOnPass {
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
+    }
+    public boolean isNew(){
+        return status == 1;
+    }
+    public void setStatusOld(){
+        status = 2;
     }
 }

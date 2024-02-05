@@ -3,8 +3,10 @@ package org.chessapp.piece;
 import javafx.scene.paint.Color;
 import org.chessapp.*;
 import org.chessapp.game.components.board.Board;
+import org.chessapp.move.EatMove;
+import org.chessapp.move.Move;
 import org.chessapp.utils.Coordinate;
-import org.chessapp.utils.ValidMove;
+import org.chessapp.utils.ValidCoordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,8 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public List<Coordinate> getMoves(Board board) {
-        List<Coordinate> coordinates = new ArrayList<>();
+    public List<Move> getMoves(Board board) {
+        List<Move> moves = new ArrayList<>();
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx = {-1, 1};
         int[] dy = {-1, 1};
@@ -29,10 +31,10 @@ public class Bishop extends Piece{
             for (int dyi : dy) {
                 for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
-                    if (ValidMove.isValidMove(newCoordinate)) {
+                    if (ValidCoordinate.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
                         if (piece == null) {
-                            coordinates.add(newCoordinate);
+                            moves.add(new Move(this, coordinate, newCoordinate));
                         } else {
                             break;
                         }
@@ -42,12 +44,12 @@ public class Bishop extends Piece{
                 }
             }
         }
-        return coordinates;
+        return moves;
     }
 
     @Override
-    public List<Coordinate> getEatMoves(Board board) {
-        List<Coordinate> coordinates = new ArrayList<>();
+    public List<Move> getEatMoves(Board board) {
+        List<Move> moves = new ArrayList<>();
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx = {-1, 1};
         int[] dy = {-1, 1};
@@ -55,11 +57,11 @@ public class Bishop extends Piece{
             for (int dyi : dy) {
                 for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
-                    if (ValidMove.isValidMove(newCoordinate)) {
+                    if (ValidCoordinate.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
                         if (piece != null) {
                             if (piece.isBlack() != isBlack()) {
-                                coordinates.add(newCoordinate);
+                                moves.add(new EatMove(this, piece, coordinate, newCoordinate));
                             }
                             break;
                         }
@@ -69,11 +71,11 @@ public class Bishop extends Piece{
                 }
             }
         }
-        return coordinates;
+        return moves;
     }
 
     @Override
-    public List<Coordinate> getAttacks(Board board) {
+    public List<Coordinate> getAttackedCoordinates(Board board) {
         List<Coordinate> coordinates = new ArrayList<>();
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx = {-1, 1};
@@ -82,7 +84,7 @@ public class Bishop extends Piece{
             for (int dyi : dy) {
                 for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
-                    if (ValidMove.isValidMove(newCoordinate)) {
+                    if (ValidCoordinate.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
                         coordinates.add(newCoordinate);
                         if (piece != null) {

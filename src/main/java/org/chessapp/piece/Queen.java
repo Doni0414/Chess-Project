@@ -3,8 +3,10 @@ package org.chessapp.piece;
 import javafx.scene.paint.Color;
 import org.chessapp.game.components.board.Board;
 import org.chessapp.Configuration;
+import org.chessapp.move.EatMove;
+import org.chessapp.move.Move;
 import org.chessapp.utils.Coordinate;
-import org.chessapp.utils.ValidMove;
+import org.chessapp.utils.ValidCoordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +22,18 @@ public class Queen extends Piece{
     }
 
     @Override
-    public List<Coordinate> getMoves(Board board) {
-        List<Coordinate> coordinates = new ArrayList<>();
+    public List<Move> getMoves(Board board) {
+        List<Move> moves = new ArrayList<>();
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx1 = {-1, 1, 0, 0};
         int[] dy1 = {0, 0, -1, 1};
         for (int i = 0; i < dx1.length; i++) {
             for (int j = 1; j < Configuration.BOARD_COLS; j++) {
                 Coordinate newCoordinate = new Coordinate(x + j * dx1[i], y + j * dy1[i]);
-                if (ValidMove.isValidMove(newCoordinate)){
+                if (ValidCoordinate.isValidMove(newCoordinate)){
                     Piece piece = board.getCell(newCoordinate).getPiece();
                     if (piece == null){
-                        coordinates.add(newCoordinate);
+                        moves.add(new Move(this, coordinate, newCoordinate));
                     }else{
                         break;
                     }
@@ -46,10 +48,10 @@ public class Queen extends Piece{
             for (int dyi : dy2) {
                 for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
-                    if (ValidMove.isValidMove(newCoordinate)) {
+                    if (ValidCoordinate.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
                         if (piece == null) {
-                            coordinates.add(newCoordinate);
+                            moves.add(new Move(this, coordinate, newCoordinate));
                         } else {
                             break;
                         }
@@ -59,23 +61,23 @@ public class Queen extends Piece{
                 }
             }
         }
-        return coordinates;
+        return moves;
     }
 
     @Override
-    public List<Coordinate> getEatMoves(Board board) {
-        List<Coordinate> coordinates = new ArrayList<>();
+    public List<Move> getEatMoves(Board board) {
+        List<Move> moves = new ArrayList<>();
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx1 = {-1, 1, 0, 0};
         int[] dy1 = {0, 0, -1, 1};
         for (int i = 0; i < dx1.length; i++) {
             for (int j = 1; j < Configuration.BOARD_COLS; j++) {
                 Coordinate newCoordinate = new Coordinate(x + j * dx1[i], y + j * dy1[i]);
-                if (ValidMove.isValidMove(newCoordinate)){
+                if (ValidCoordinate.isValidMove(newCoordinate)){
                     Piece piece = board.getCell(newCoordinate).getPiece();
                     if (piece != null){
                         if (piece.isBlack() != isBlack()){
-                            coordinates.add(newCoordinate);
+                            moves.add(new EatMove(this, piece, coordinate, newCoordinate));
                         }
                         break;
                     }
@@ -90,11 +92,11 @@ public class Queen extends Piece{
             for (int dyi : dy2) {
                 for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
-                    if (ValidMove.isValidMove(newCoordinate)) {
+                    if (ValidCoordinate.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
                         if (piece != null){
                             if (piece.isBlack() != isBlack()){
-                                coordinates.add(newCoordinate);
+                                moves.add(new EatMove(this, piece, coordinate, newCoordinate));
                             }
                             break;
                         }
@@ -104,11 +106,11 @@ public class Queen extends Piece{
                 }
             }
         }
-        return coordinates;
+        return moves;
     }
 
     @Override
-    public List<Coordinate> getAttacks(Board board) {
+    public List<Coordinate> getAttackedCoordinates(Board board) {
         List<Coordinate> coordinates = new ArrayList<>();
         int x = coordinate.getX(), y = coordinate.getY();
         int[] dx1 = {-1, 1, 0, 0};
@@ -116,7 +118,7 @@ public class Queen extends Piece{
         for (int i = 0; i < dx1.length; i++) {
             for (int j = 1; j < Configuration.BOARD_COLS; j++) {
                 Coordinate newCoordinate = new Coordinate(x + j * dx1[i], y + j * dy1[i]);
-                if (ValidMove.isValidMove(newCoordinate)){
+                if (ValidCoordinate.isValidMove(newCoordinate)){
                     Piece piece = board.getCell(newCoordinate).getPiece();
                     coordinates.add(newCoordinate);
                     if(piece != null){
@@ -133,7 +135,7 @@ public class Queen extends Piece{
             for (int dyi : dy2) {
                 for (int k = 1; k < Configuration.BOARD_COLS; k++) {
                     Coordinate newCoordinate = new Coordinate(x + k * dxi, y + k * dyi);
-                    if (ValidMove.isValidMove(newCoordinate)) {
+                    if (ValidCoordinate.isValidMove(newCoordinate)) {
                         Piece piece = board.getCell(newCoordinate).getPiece();
                         coordinates.add(newCoordinate);
                         if(piece != null){

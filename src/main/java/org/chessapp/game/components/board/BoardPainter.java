@@ -1,15 +1,19 @@
 package org.chessapp.game.components.board;
 
 import javafx.scene.paint.Color;
+import org.chessapp.piece.King;
 import org.chessapp.piece.Piece;
 import org.chessapp.utils.Coordinate;
-import org.chessapp.utils.ValidMove;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BoardPainter {
     public static void paintMoves(Board board, Piece piece){
-        List<Coordinate> coordinates = piece.getMoves(board);
+        System.out.println("Paint: " + piece.getMoves(board));
+        List<Coordinate> coordinates = piece.getMoves(board).stream()
+                .map(move -> new Coordinate(move.getDest().getX(), move.getDest().getY()))
+                .collect(Collectors.toList());
         Cell[][] cells = board.getCells();
         for(Coordinate coordinate: coordinates){
             Cell cell = cells[coordinate.getY()][coordinate.getX()];
@@ -18,7 +22,9 @@ public class BoardPainter {
         }
     }
     public static void paintEatMoves(Board board, Piece piece){
-        List<Coordinate> coordinates = piece.getEatMoves(board);
+        List<Coordinate> coordinates = piece.getEatMoves(board).stream()
+                .map(move -> new Coordinate(move.getDest().getX(), move.getDest().getY()))
+                .collect(Collectors.toList());
         Cell[][] cells = board.getCells();
         for(Coordinate coordinate: coordinates){
             Cell cell = cells[coordinate.getY()][coordinate.getX()];
@@ -39,5 +45,22 @@ public class BoardPainter {
     }
     public static void paintCell(Cell cell, Color color){
         cell.getRectangle().setFill(color);
+    }
+    public static void paintCheck(Board board, boolean isBlack){
+        List<Piece> pieces = board.getTeam(isBlack);
+        for (Piece piece: pieces){
+            if (piece instanceof King){
+                paintCell(board.getCell(piece.getCoordinate()), Color.ORANGE);
+            }
+        }
+    }
+
+    public static void paintMate(Board board, boolean blackTurn) {
+        List<Piece> pieces = board.getTeam(blackTurn);
+        for (Piece piece: pieces){
+            if (piece instanceof King){
+                paintCell(board.getCell(piece.getCoordinate()), Color.RED);
+            }
+        }
     }
 }
