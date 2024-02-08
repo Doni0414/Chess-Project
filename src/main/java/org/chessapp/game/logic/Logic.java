@@ -1,5 +1,6 @@
 package org.chessapp.game.logic;
 
+import javafx.scene.paint.Color;
 import org.chessapp.game.Game;
 import org.chessapp.game.components.board.Board;
 import org.chessapp.game.components.board.BoardPainter;
@@ -34,6 +35,7 @@ public class Logic {
                     BoardPainter.repaint(board);
                     GameStatusHandler.check(game, board);
                     setTarget(piece);
+                    cell.getRectangle().setFill(Color.BLUE);
                     BoardPainter.paintMoves(board, piece);
                     BoardPainter.paintEatMoves(board, piece);
                 }else if(target != null){

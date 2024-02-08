@@ -54,13 +54,14 @@ public class King extends Piece{
         Piece piece1 = cell1.getPiece();
         Piece piece2 = cell2.getPiece();
         if(!isMoved() && piece1 instanceof Rook && !piece1.isMoved()) {
-            Coordinate kingDest = new Coordinate(coordinate.getX() - 3, coordinate.getY());
-            Coordinate rookDest = new Coordinate(piece1.getCoordinate().getX() + 2, piece1.getCoordinate().getY());
-            boolean flag = true;
-            for (int i = coordinate.getX(); i >= kingDest.getX(); i--) {
+            Coordinate kingDest = new Coordinate(coordinate.getX() - 2, coordinate.getY());
+            Coordinate rookDest = new Coordinate(piece1.getCoordinate().getX() + 3, piece1.getCoordinate().getY());
+            boolean flag = !attackedCoordinates.contains(coordinate);
+            for (int i = coordinate.getX() - 1; i >= 1; i--) {
                 Coordinate newCoordinate = new Coordinate(i, coordinate.getY());
                 if (attackedCoordinates.contains(newCoordinate) || !board.isEmptyCell(newCoordinate)) {
                     flag = false;
+                    break;
                 }
             }
             if (flag) {
@@ -70,11 +71,12 @@ public class King extends Piece{
         if(!isMoved() && piece2 instanceof Rook && !piece2.isMoved()) {
             Coordinate kingDest = new Coordinate(coordinate.getX() + 2, coordinate.getY());
             Coordinate rookDest = new Coordinate(piece2.getCoordinate().getX() - 2, piece2.getCoordinate().getY());
-            boolean flag = true;
-            for (int i = coordinate.getX(); i <= kingDest.getX(); i++) {
+            boolean flag = !attackedCoordinates.contains(coordinate);
+            for (int i = coordinate.getX() + 1 ; i <= kingDest.getX(); i++) {
                 Coordinate newCoordinate = new Coordinate(i, coordinate.getY());
                 if (attackedCoordinates.contains(newCoordinate) || !board.isEmptyCell(newCoordinate)) {
                     flag = false;
+                    break;
                 }
             }
             if (flag) {
