@@ -13,10 +13,7 @@ public class MoveHandler {
     }
     public void handle(Board board) {
         Piece piece = move.getPiece();
-        if (piece instanceof Pawn) {
-            ((Pawn) piece).setMoved(true);
-            System.out.println(((Pawn) piece).isMoved() + " from handle!");
-        }
+        piece.setMoved(true);
         board.setPiece(null, move.getSrc());
         board.setPiece(piece, move.getDest());
     }
@@ -24,7 +21,6 @@ public class MoveHandler {
         Piece piece = move.getPiece();
         if (recover) {
             piece.setMoved(false);
-            System.out.println(piece.isMoved() + " from recover!");
         }
         board.setPiece(null, move.getDest());
         board.setPiece(piece, move.getSrc());

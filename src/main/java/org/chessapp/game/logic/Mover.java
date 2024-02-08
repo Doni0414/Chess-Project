@@ -1,11 +1,11 @@
 package org.chessapp.game.logic;
 
 import org.chessapp.game.components.board.Board;
-import org.chessapp.game.components.board.Cell;
 import org.chessapp.game.logic.gameStatusChecker.CheckStatusChecker;
 import org.chessapp.game.logic.moveHandler.*;
 import org.chessapp.move.*;
 import org.chessapp.piece.Piece;
+import org.chessapp.piece.Rook;
 import org.chessapp.utils.Coordinate;
 import org.chessapp.utils.TakeOnPassUtils;
 

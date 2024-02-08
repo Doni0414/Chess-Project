@@ -11,6 +11,9 @@ public class RookingMove extends Move{
 
     public RookingMove(King king, Coordinate kingSrc, Coordinate kingDest, Rook rook, Coordinate rookSrc, Coordinate rookDest) {
         super(king, kingSrc, kingDest);
+        setRook(rook);
+        setRookSrc(rookSrc);
+        setRookDest(rookDest);
     }
 
     public Rook getRook() {
