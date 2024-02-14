@@ -12,6 +12,7 @@ public class Game extends HBox {
     private boolean isStarted;
     private boolean isFinished;
     private boolean blackTurn;
+    private boolean paused;
     private final Logic logic;
 
     public Game(Board board, SidePane sidePane){
@@ -60,5 +61,13 @@ public class Game extends HBox {
     public void setStatus(String text){
         GameStatusPane statusPane = getSidePane().getGameStatusPane();
         statusPane.setText(text);
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 }

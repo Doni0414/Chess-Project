@@ -57,4 +57,11 @@ public class Cell extends StackPane {
     public void setTakeOnPass(TakeOnPass takeOnPass) {
         this.takeOnPass = takeOnPass;
     }
+
+    public double getCellWidth() {
+        return rectangle.getWidth();
+    }
+    public double getCellHeight() {
+        return rectangle.getHeight();
+    }
 }

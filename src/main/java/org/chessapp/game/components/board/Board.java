@@ -1,6 +1,7 @@
 package org.chessapp.game.components.board;
 
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.chessapp.Configuration;
 import org.chessapp.utils.Coordinate;
@@ -9,10 +10,12 @@ import org.chessapp.piece.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board extends GridPane {
+public class Board extends Pane {
     private Cell[][] cells;
+    private GridPane grid;
 
     public Board(double width, double height){
+        grid = new GridPane();
         this.cells = new Cell[Configuration.BOARD_ROWS][Configuration.BOARD_COLS];
         for (int i = 0; i < Configuration.BOARD_ROWS; i++) {
             for (int j = 0; j < Configuration.BOARD_COLS; j++) {
@@ -23,9 +26,10 @@ public class Board extends GridPane {
                     cell = new Cell(width / Configuration.BOARD_COLS, height / Configuration.BOARD_ROWS, Color.BLACK, new Coordinate(j, i));
                 }
                 cells[i][j] = cell;
-                add(cell, j, i);
+                grid.add(cell, j, i);
             }
         }
+        getChildren().add(grid);
     }
 
     public Cell[][] getCells() {
